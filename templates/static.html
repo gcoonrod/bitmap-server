@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Files</title>
+    </head>
+<body>
+    <header>
+        <h1>Static Files</h1>
+    </header>
+    <main>
+        <p>This page is served from the static directory.</p>
+        <p>Check the console for a message.</p>
+        <ul>
+            {% for file in files %}
+            <li>
+                <a href="{{ url_for('static', path=file.name) }}" target="_blank"><strong>{{ file.name }}</strong></a> - {{ file.size }} bytes - Created on {{ file.created_at }}
+                {% if file.name.endswith('.bmp') %}
+                    <br>
+                    <img src="{{ url_for('static', path=file.name) }}" alt="{{ file.name }}" style="max-width:200px;max-height:200px;border:1px solid #a020f0;">
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+</html>
